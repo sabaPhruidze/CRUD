@@ -49,9 +49,12 @@ export default function Home() {
                     >
                       Read
                     </Link>
-                    <button className="btn btn-sm btn-primary mx-2">
+                    <Link
+                      to={`/edit/${student.id}`}
+                      className="btn btn-primary mx-2"
+                    >
                       Edit
-                    </button>
+                    </Link>
                     <button className="btn btn-sm btn-danger">Delete</button>
                   </td>
                 </tr>

@@ -9,6 +9,7 @@ import Root from "./components/Root";
 import Home from "./components/Home";
 import Create from "./components/Create";
 import Read from "./components/Read";
+import Update from "./components/Update";
 
 function App() {
   const router = createBrowserRouter(
@@ -17,6 +18,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/create" element={<Create />} />
         <Route path="/read/:id" element={<Read />} />
+        <Route path="/edit/:id" element={<Update />} />
       </Route>
     )
   );
