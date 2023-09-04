@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -43,7 +43,12 @@ export default function Home() {
                   <td>{student.firstname}</td>
                   <td>{student.email}</td>
                   <td>
-                    <button className="btn btn-sm btn-info">Read</button>
+                    <Link
+                      to={`/read/${student.id}`}
+                      className="btn btn-sm btn-info"
+                    >
+                      Read
+                    </Link>
                     <button className="btn btn-sm btn-primary mx-2">
                       Edit
                     </button>

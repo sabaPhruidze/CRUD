@@ -1,20 +1,25 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 interface Form {
   name: string;
   email: string;
 }
 
-const onSubmit = (data: Form) => {
-  // console.log(data);
-  axios
-    .post("http://localhost:8081/student", data)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
-};
-
 export default function Create() {
   const { register, handleSubmit } = useForm<Form>();
+  const navigate = useNavigate();
+  const onSubmit = (data: Form) => {
+    // console.log(data);
+    axios
+      .post("http://localhost:8081/student", data)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">

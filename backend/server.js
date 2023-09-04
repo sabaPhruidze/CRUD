@@ -30,6 +30,15 @@ app.post("/student", (req, res) => {
   });
 });
 
+app.get("/read/:id", (req, res) => {
+  const sql = "SELECT * FROM students WHERE id = ?";
+  const id = req.params.id;
+  db.query(sql, [id], (err, result) => {
+    if (err) return res.json({ Message: "Error inside read" });
+    return res.json(result);
+  });
+});
+
 app.listen(8081, () => {
   console.log("listening");
 });
