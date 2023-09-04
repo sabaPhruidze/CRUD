@@ -4,6 +4,7 @@ import cors from "cors";
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 const db = mysql.createConnection({
   host: "localhost",
@@ -16,6 +17,15 @@ app.get("/", (req, res) => {
   const sql = "SELECT * FROM students";
   db.query(sql, (err, result) => {
     if (err) return res.json({ Message: "Error inside the server" });
+    return res.json(result);
+  });
+});
+
+app.post("/student", (req, res) => {
+  const sql = "INSERT INTO students (firstname,email) VALUES (?)";
+  const values = [req.body.name, req.body.email];
+  db.query(sql, [values], (err, result) => {
+    if (err) return res.json(err);
     return res.json(result);
   });
 });
