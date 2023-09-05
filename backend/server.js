@@ -39,6 +39,16 @@ app.get("/read/:id", (req, res) => {
   });
 });
 
+app.put("/update/:id", (req, res) => {
+  const sql = "UPDATE students SET `firstname`=?, `email`=? WHERE id=?";
+  const id = req.params.id;
+  const values = [req.body.name, req.body.email, id];
+  db.query(sql, values, (err, result) => {
+    if (err) return res.json({ Message: "Error inside server" });
+    return res.json(result);
+  });
+});
+
 app.listen(8081, () => {
   console.log("listening");
 });

@@ -13,17 +13,7 @@ function Update() {
   const { id } = useParams();
 
   //
-  const onSubmit = (data: Form) => {
-    console.log(data);
-    //   axios
-    //     .get("http://localhost:8081/read/"+id)
-    //     .then((res) => {
-    //       console.log(res);
-    //       navigate("/");
-    //     })
-    //     .catch((err) => console.log(err));
-  };
-  //
+
   useEffect(() => {
     axios
       .get("http://localhost:8081/read/" + id)
@@ -42,6 +32,17 @@ function Update() {
     name: "",
     email: "",
   });
+  const onSubmit = (data: Form) => {
+    console.log(data);
+    axios
+      .put("http://localhost:8081/update/" + id, values)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
+  //
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">
@@ -55,6 +56,7 @@ function Update() {
               id="name"
               className="form-control"
               value={values.name}
+              onChange={(e) => setValues({ ...values, name: e.target.value })}
             />
           </div>
           <div className="mb-2">
@@ -65,6 +67,7 @@ function Update() {
               id="email"
               className="form-control"
               value={values.email}
+              onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
           </div>
           <button className="btn btn-success" type="submit">
