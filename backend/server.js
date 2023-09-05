@@ -49,6 +49,15 @@ app.put("/update/:id", (req, res) => {
   });
 });
 
+app.delete("/delete/:id", (req, res) => {
+  const sql = "DELETE FROM students WHERE id = ?";
+  const id = req.params.id;
+  db.query(sql, [id], (err, result) => {
+    if (err) return res.json({ Message: "Error inside server" });
+    return res.json(result);
+  });
+});
+
 app.listen(8081, () => {
   console.log("listening");
 });
